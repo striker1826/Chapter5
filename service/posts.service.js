@@ -3,29 +3,33 @@ class PostsService {
   postsRepository = new postsRepository();
 
   // 게시판 생성
-  createPost = async (req, res, next) => {
-    console.log("@@@@@@@@@@@@@@", res.locals.user);
-    const { id } = res.locals.user;
-    const { title, content } = req.body;
+  createPost = async (id, title, content) => {
+    const createPostData = await this.postsRepository.createPost(
+      id,
+      title,
+      content
+    );
 
-    await this.PostsService.createPost(id, title, content);
-
-    res.status(201).json({ message: "게시글이 생성되었습니다." });
+    return {
+      userNum: createPostData.id,
+      title: createPostData.title,
+      content: createPostData.content,
+      createdAt: createPostData.createdAt,
+      updatedAt: createPostData.updatedAt,
+    };
   };
   // 게시판 조회
 
   // 게시판 수정
-  updatePost = async (titleId, title, content) => {
+  updatePost = async (postId, title, content, id) => {
+    console.log(postId, title, content, id);
     try {
-      const updatePost = await this.postsRepository.update(
-        titleId,
-        title,
-        content
-      );
+      await this.postsRepository.updatePost(postId, title, content, id);
       return {
-        id: updatePost.title,
-        title: updatePost.titlem,
+        id: updatePost.postId,
+        title: updatePost.title,
         content: updatePost.content,
+        userNum: updatePost.id,
       };
     } catch (e) {
       return {
@@ -35,11 +39,11 @@ class PostsService {
     }
   };
   // 게시판 삭제
-  deletePost = async (titleId) => {
+  deletePost = async (postId, id) => {
     try {
-      const deletePost = await this.postsRepository.delete(titleId);
+      const deletePost = await this.postsRepository.deletePost(postId, id);
       return {
-        id: deletePost.title,
+        id: deletePost.postId,
       };
     } catch (e) {
       return {

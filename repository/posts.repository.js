@@ -2,26 +2,30 @@ const { Posts } = require("../models");
 
 class PostsRepository {
   // 게시판 생성
-  createPost = async (userNum, title, content) => {
-    const createPostData = await Posts.create({ userNum, title, content });
+  createPost = async (id, title, content) => {
+    const createPost = await Posts.create({ userNum: id, title, content });
 
-    return createPostData;
+    return createPost;
   };
 
   // 게시판 조회
 
   // 게시판 수정
-  updatePost = async (titleId, title, content) => {
+  updatePost = async (postId, title, content, id) => {
+    console.log("repo: ", postId, title, content, id);
     const updatePost = Posts.update(
-      { titleId, title, content },
-      { where: { id: titleId } }
+      { title, content },
+      { where: { id: postId, userNum: id } }
     );
     return updatePost;
   };
 
   // 게시판 삭제
-  deletePost = async (titleId) => {
-    const deletePost = Posts.delete({ id: titleId });
+  deletePost = async (postId, id) => {
+    console.log("repo: ", postId);
+    const deletePost = Posts.destroy({
+      where: { id: postId, userNum: id },
+    });
     return deletePost;
   };
 }
