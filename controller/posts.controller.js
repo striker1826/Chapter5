@@ -15,6 +15,11 @@ class PostsController {
   };
 
   // 게시판 조회
+  getPosts = async (req, res, next) => {
+    const posts = await this.PostsService.findAllPost();
+
+    res.status(200).json({ data: posts });
+  };
 
   // 게시판 수정
   updatepost = async (req, res, next) => {

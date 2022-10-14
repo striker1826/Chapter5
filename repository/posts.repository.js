@@ -1,4 +1,4 @@
-const { Posts } = require("../models");
+const { Posts, sequelize } = require("../models");
 
 class PostsRepository {
   // 게시판 생성
@@ -9,6 +9,12 @@ class PostsRepository {
   };
 
   // 게시판 조회
+  findAllPost = async () => {
+    // const allPost = await Posts.findAll();
+    const [ posts ] = await sequelize.query("SELECT * FROM Posts JOIN Members ON Posts.userNum = Members.id");
+
+    return posts;
+  }
 
   // 게시판 수정
   updatePost = async (titleId, title, content) => {
