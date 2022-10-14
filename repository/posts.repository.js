@@ -11,7 +11,7 @@ class PostsRepository {
   // 게시판 조회
   findAllPost = async () => {
     // const allPost = await Posts.findAll();
-    const [ posts ] = await sequelize.query("SELECT * FROM Posts JOIN Members ON Posts.userNum = Members.id");
+    const [ posts ] = await sequelize.query("SELECT p.id, m.nickname, p.title, p.content, p.like, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id");
 
     return posts;
   }

@@ -19,21 +19,12 @@ class PostsService {
   // 게시판 조회
   findAllPost = async () => {
     const allPost = await this.postsRepository.findAllPost();
+    
+    const allPostSort = allPost.sort((a, b) => 
+      b.id - a.id
+    );
 
-    allPost.sort((a, b) => {
-      return b.createdAt - a.createdAt;
-    })
-
-    return allPost.map((post) => {
-      return {
-        id: post.id,
-        nickname: post.nickname,
-        title: post.title,
-        likes: post.likes || 0,
-        createdAt: post.createdAt,
-        updatedAt: post.updatedAt,
-      }
-    });
+    return allPostSort;
   };
 
   // 게시판 수정
