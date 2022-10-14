@@ -37,17 +37,15 @@ class PostsService {
   };
 
   // 게시판 수정
-  updatePost = async (titleId, title, content) => {
+  updatePost = async (postId, title, content, id) => {
+    console.log(postId, title, content, id);
     try {
-      const updatePost = await this.postsRepository.update(
-        titleId,
-        title,
-        content
-      );
+      await this.postsRepository.updatePost(postId, title, content, id);
       return {
-        id: updatePost.title,
-        title: updatePost.titlem,
+        id: updatePost.postId,
+        title: updatePost.title,
         content: updatePost.content,
+        userNum: updatePost.id,
       };
     } catch (e) {
       return {
@@ -57,11 +55,11 @@ class PostsService {
     }
   };
   // 게시판 삭제
-  deletePost = async (titleId) => {
+  deletePost = async (postId, id) => {
     try {
-      const deletePost = await this.postsRepository.delete(titleId);
+      const deletePost = await this.postsRepository.deletePost(postId, id);
       return {
-        id: deletePost.title,
+        id: deletePost.postId,
       };
     } catch (e) {
       return {
