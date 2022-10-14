@@ -5,6 +5,7 @@ const passwordReg = /^[a-zA-Z0-9]{4,20}$/;
 
 class MembersService {
   membersRepository = new membersRepository();
+
   createMembers = async (userId, nickname, password, confirmPw) => {
     if (
       !nicknameReg.test(userId) ||
@@ -35,6 +36,17 @@ class MembersService {
       };
     }
   };
+
+  findOneMember = async (userId, password) => {
+    const findOneMember = await this.membersRepository.findOneMember(userId);
+    console.log(findOneMember);
+
+    if(!findOneMember || password !== findOneMember.password) {
+      throw new Error('닉네임 또는 패스워드를 확인해주세요.')
+    }
+    return findOneMember;
+  };
+
 }
 
 module.exports = MembersService;

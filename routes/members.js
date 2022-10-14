@@ -5,8 +5,6 @@ const membersController = new MembersController();
 
 router.post("/signup", membersController.createMembers);
 
-// router.post("/login", (req, res) => {
-//   res.send("login");
-// });
+router.post("/login", membersController.loginMembers);
 
 module.exports = router;
