@@ -1,4 +1,5 @@
 const { Members } = require("../models");
+
 class MembersRepository {
 
   createMembers = async (userId, nickname, password) => {

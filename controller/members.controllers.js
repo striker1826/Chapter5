@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require("jsonwebtoken");
 const MembersService = require("../service/members.service");
 const jwt = require("jsonwebtoken");
 
