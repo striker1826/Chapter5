@@ -13,7 +13,6 @@ class MembersService {
       userId: createdMember.userId,
       nickname: createdMember.nickname,
       password: createdMember.password,
-      confirPw: createdMember.confirPw,
     };
   };
 }
