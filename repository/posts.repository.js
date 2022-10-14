@@ -1,4 +1,4 @@
-const { Posts } = require("../models");
+const { Posts, sequelize } = require("../models");
 
 class PostsRepository {
   // 게시판 생성
@@ -9,6 +9,26 @@ class PostsRepository {
   };
 
   // 게시판 조회
+  findAllPost = async () => {
+    // const allPost = await Posts.findAll();
+    const [ posts ] = await sequelize.query("SELECT p.id, m.nickname, p.title, p.content, p.like, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id");
+    
+    return posts;
+  }
+  
+  // 게시판 상세 조회
+  findPostById = async (postId) => {
+    // const post = await Posts.findByPk(postId);
+    const [ posts ] = await sequelize.query("SELECT p.id, m.nickname, p.title, p.content, p.like, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id");
+
+    for(let i = 0; i < posts.length; i++) {
+      if(posts[i].id == postId) {
+        return posts[i];
+      }
+    }
+    
+    return posts;
+  }
 
   // 게시판 수정
   updatePost = async (postId, title, content, id) => {

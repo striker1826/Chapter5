@@ -1,14 +1,11 @@
-const postsRepository = require("../repository/posts.repository");
+const PostsRepository = require("../repository/posts.repository");
+
 class PostsService {
-  postsRepository = new postsRepository();
+  postsRepository = new PostsRepository();
 
   // 게시판 생성
   createPost = async (id, title, content) => {
-    const createPostData = await this.postsRepository.createPost(
-      id,
-      title,
-      content
-    );
+    const createPostData = await this.postsRepository.createPost( id, title, content );
 
     return {
       userNum: createPostData.id,
@@ -16,9 +13,26 @@ class PostsService {
       content: createPostData.content,
       createdAt: createPostData.createdAt,
       updatedAt: createPostData.updatedAt,
-    };
+    }
   };
+
   // 게시판 조회
+  findAllPost = async () => {
+    const allPost = await this.postsRepository.findAllPost();
+    
+    const allPostSort = allPost.sort((a, b) => 
+      b.id - a.id
+    );
+
+    return allPostSort;
+  };
+
+  // 게시판 상세 조회
+  findPostById = async (postId) => {
+    const findPost = await this.postsRepository.findPostById(postId);
+
+    return findPost
+  }
 
   // 게시판 수정
   updatePost = async (postId, title, content, id) => {
@@ -38,6 +52,7 @@ class PostsService {
       };
     }
   };
+
   // 게시판 삭제
   deletePost = async (postId, id) => {
     try {
