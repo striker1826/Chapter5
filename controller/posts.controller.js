@@ -5,11 +5,10 @@ class PostsController {
 
   // 게시판 생성
   createPost = async (req, res, next) => {
-    console.log("@@@@@@@@@@@@@@", res.locals.user);
     const { id } = res.locals.user;
     const { title, content } = req.body;
 
-    const createPostData = await this.PostsService.createPost( id, title, content );
+    await this.PostsService.createPost(id, title, content);
 
     res.status(201).json({ message: "게시글이 생성되었습니다." });
   };
@@ -19,15 +18,19 @@ class PostsController {
   // 게시판 수정
   updatepost = async (req, res, next) => {
     const { title, content } = req.body;
-    const { titleId } = req.params;
-    await this.PostsService.updatePost(titleId, title, content);
+    const { postId } = req.params;
+    const { id } = res.locals.user;
+    console.log("cont:", title, content, postId, id);
+    await this.PostsService.updatePost(postId, title, content, id);
     res.status(200).send("게시글이 수정되었습니다");
   };
 
   // 게시판 삭제
   deletepost = async (req, res, next) => {
-    const { titleId } = req.params;
-    await this.PostsService.deletePost(titleId);
+    const { postId } = req.params;
+    const { id } = res.locals.user;
+    console.log("cont:", postId);
+    await this.PostsService.deletePost(postId, id);
     res.status(200).send("게시글이 삭제되었습니다");
   };
 }
