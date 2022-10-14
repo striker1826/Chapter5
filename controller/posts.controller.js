@@ -20,6 +20,14 @@ class PostsController {
     res.status(200).json({ data: posts });
   };
 
+  // 게시판 상세 조회
+  getPostById = async (req, res, next) => {
+    const { postId } = req.params;
+    const post = await this.PostsService.findPostById(postId);
+    
+    res.status(200).json({ data: post });
+  };
+
   // 게시판 수정
   updatepost = async (req, res, next) => {
     const { title, content } = req.body;

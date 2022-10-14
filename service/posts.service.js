@@ -27,6 +27,13 @@ class PostsService {
     return allPostSort;
   };
 
+  // 게시판 상세 조회
+  findPostById = async (postId) => {
+    const findPost = await this.postsRepository.findPostById(postId);
+
+    return findPost
+  }
+
   // 게시판 수정
   updatePost = async (postId, title, content, id) => {
     console.log(postId, title, content, id);
@@ -45,6 +52,7 @@ class PostsService {
       };
     }
   };
+
   // 게시판 삭제
   deletePost = async (postId, id) => {
     try {

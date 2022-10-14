@@ -11,7 +11,7 @@ router.post("/", authMiddleware, postsController.createPost);
 // 게시판 조회
 router.get('/', postsController.getPosts);
 // 게시판 상세조회
-router.get('/:postId', postsController.getPosts)
+router.get('/:postId', postsController.getPostById);
 // 게시판 수정
 router.patch("/:postId", authMiddleware, postsController.updatepost);
 // 게시판 삭제
