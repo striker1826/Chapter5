@@ -1,15 +1,15 @@
-require("dotenv").config();
 
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const port = 3000;
-const { index } = require("./routes");
+require("dotenv").config();
+const routes = require("./routes");
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/", index);
+app.use('/', routes);
 
 app.use("/", (req, res) => {
   res.send("hello");
