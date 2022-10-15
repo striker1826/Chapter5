@@ -13,7 +13,7 @@ class MembersController {
         password,
         confirmPw
       );
-      res.status(result.status).json({ message: result.message });
+      res.send("회원가입에 성공했습니다");
     } catch (e) {
       res.json(e);
     }
