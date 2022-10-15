@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const commentsCroller = require("../controller/comments.controller");
+const CommentsController = require("../controller/comments.controller");
+const commentsController = new CommentsController();
+const authMiddleware = require("../middlewares/auth-middleware");
 
-router.post("/:postId", commentsCroller);
-router.patch("/:commentId", commentsCroller);
+router.post("/:postId", authMiddleware, commentsController.createComment);
 
 module.exports = router;

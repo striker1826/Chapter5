@@ -1,5 +1,10 @@
-const { comments } = require("../models");
+const { Comments } = require("../models");
 
-class CommentsRepository {}
+class CommentsRepository {
+  createComment = async (comment) => {
+    await Comments.create(comment);
+    return;
+  };
+}
 
 module.exports = CommentsRepository;
