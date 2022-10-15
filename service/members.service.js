@@ -7,16 +7,7 @@ class MembersService {
   membersRepository = new membersRepository();
 
   createMembers = async (userId, nickname, password, confirmPw) => {
-    if (
-      !nicknameReg.test(userId) ||
-      !nicknameReg.test(nickname) ||
-      !passwordReg.test(password)
-    ) {
-      //   throw new Error("error 표시");
-      throw Error("로그인이 조건에 맞는지 확인해 주세요");
-    }
     try {
-      //   throw Error("에러다");
       const createdMember = await this.membersRepository.createMembers(
         userId,
         nickname,
@@ -41,12 +32,11 @@ class MembersService {
     const findOneMember = await this.membersRepository.findOneMember(userId);
     console.log(findOneMember);
 
-    if(!findOneMember || password !== findOneMember.password) {
-      throw new Error('닉네임 또는 패스워드를 확인해주세요.')
+    if (!findOneMember || password !== findOneMember.password) {
+      throw new Error("닉네임 또는 패스워드를 확인해주세요.");
     }
     return findOneMember;
   };
-
 }
 
 module.exports = MembersService;
