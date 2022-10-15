@@ -7,7 +7,7 @@ const LikesController = require("../controller/likes.controller");
 const likesController = new LikesController();
 
 // 게시글 좋아요
-// router.post("/post/:postId", authMiddleware, likesController.likePost);
-// 
+router.put("/post/:postId", authMiddleware, likesController.likePost);
+
 
 module.exports = router;
