@@ -24,7 +24,7 @@ class PostsController {
   getPostById = async (req, res, next) => {
     const { postId } = req.params;
     const post = await this.PostsService.findPostById(postId);
-    
+
     res.status(200).json({ data: post });
   };
 
@@ -46,6 +46,12 @@ class PostsController {
     await this.PostsService.deletePost(postId, id);
     res.status(200).send("게시글이 삭제되었습니다");
   };
-}
 
+  // 게시글 좋아요
+  likePost = async (req, res, next) => {
+    const { postId } = req.params;
+    const { id } = res.locals.user;
+    await this.PostsService.likePost(postId, id);
+  };
+}
 module.exports = PostsController;

@@ -5,7 +5,11 @@ class PostsService {
 
   // 게시판 생성
   createPost = async (id, title, content) => {
-    const createPostData = await this.postsRepository.createPost( id, title, content );
+    const createPostData = await this.postsRepository.createPost(
+      id,
+      title,
+      content
+    );
 
     return {
       userNum: createPostData.id,
@@ -13,16 +17,14 @@ class PostsService {
       content: createPostData.content,
       createdAt: createPostData.createdAt,
       updatedAt: createPostData.updatedAt,
-    }
+    };
   };
 
   // 게시판 조회
   findAllPost = async () => {
     const allPost = await this.postsRepository.findAllPost();
-    
-    const allPostSort = allPost.sort((a, b) => 
-      b.id - a.id
-    );
+
+    const allPostSort = allPost.sort((a, b) => b.id - a.id);
 
     return allPostSort;
   };
@@ -31,8 +33,8 @@ class PostsService {
   findPostById = async (postId) => {
     const findPost = await this.postsRepository.findPostById(postId);
 
-    return findPost
-  }
+    return findPost;
+  };
 
   // 게시판 수정
   updatePost = async (postId, title, content, id) => {
@@ -66,6 +68,11 @@ class PostsService {
         status: 400,
       };
     }
+  };
+
+  // 게시글 좋아요
+  likePost = async (postNum, userNum) => {
+    return this.postsRepository.likePost;
   };
 }
 
