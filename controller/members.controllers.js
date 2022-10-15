@@ -24,9 +24,11 @@ class MembersController {
 
     try {
       const user = await this.MembersService.findOneMember(userId, password);
-      
+
       res.send({
-        token: jwt.sign({ userId: user.userId }, process.env.COOKIE_NAME, {expiresIn: '60m'})
+        token: jwt.sign({ userId: user.userId }, process.env.COOKIE_NAME, {
+          expiresIn: "24h",
+        }),
       });
     } catch (e) {
       console.log(e);
