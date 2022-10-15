@@ -9,6 +9,12 @@ class LikesService {
         const result = await this.likesRepository.updateLike(currentLike, postNum, userNum);
         return result;
     }
+
+    getAllLikePosts = async (userId) => {
+        const myLikeArr = await this.likesRepository.getAllLikePosts(userId);
+        let myLikeList = myLikeArr.sort((a,b) => b.createdAt - a.createdAt)
+        return myLikeList;
+    };
 }
 
 module.exports = LikesService;
