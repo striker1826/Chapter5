@@ -6,9 +6,10 @@ class LikesController {
     likePost = async (req, res, nexxt) => {
         const { postId } = req.params;
         console.log(res.locals.user);
-        const { userId } = res.locals.user;
+        const { id } = res.locals.user;
 
-        await this.LikesService.updateLike(postId, userId);
+        const result = await this.LikesService.updateLike(postId, id);
+        res.status(201).send(result);
     }
 }
 

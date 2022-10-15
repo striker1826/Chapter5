@@ -3,9 +3,11 @@ const LikesRepository = require("../repository/likes.repository")
 class LikesService {
     likesRepository = new LikesRepository();
 
-    updateLike = async (postId, userId) => {
-        const like = await this.likesRepository.updateLike(postId, userId);
-        return resizeBy.json({like})
+    updateLike = async (postNum, userNum) => {
+        const currentLike = await this.likesRepository.findLikeOne(postNum, userNum);
+        
+        const result = await this.likesRepository.updateLike(currentLike, postNum, userNum);
+        return result;
     }
 }
 
