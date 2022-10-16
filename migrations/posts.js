@@ -18,7 +18,7 @@ module.exports = {
       content: {
         type: Sequelize.STRING,
       },
-      like: {
+      likes: {
         type: Sequelize.INTEGER,
         defaultValue: 0,
       },

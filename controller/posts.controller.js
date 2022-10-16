@@ -23,9 +23,9 @@ class PostsController {
   // 게시판 상세 조회
   getPostById = async (req, res, next) => {
     const { postId } = req.params;
-    const post = await this.PostsService.findPostById(postId);
-
-    res.status(200).json({ data: post });
+    const findPost = await this.PostsService.findPostById(postId);
+    console.log("cont: ", findPost);
+    res.status(200).send(findPost);
   };
 
   // 게시판 수정

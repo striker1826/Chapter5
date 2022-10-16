@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       userNum: DataTypes.INTEGER,
       title: DataTypes.STRING,
       content: DataTypes.STRING,
-      like: {
+      likes: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
