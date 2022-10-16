@@ -52,21 +52,23 @@ class PostsRepository {
     });
     return deletePost;
   };
+
+  // 게시글 좋아요
+  likePost = async (postNum, userNum) => {
+    console.log("좋아요 확인");
+  };
+
+  // 게시글 좋아요 증가
+  postLikeIncrement = async (postNum) => {
+    await Posts.increment({ like: 1 }, { where: { id: postNum } });
+    return;
+  };
+
+  // 게시글 좋아요 감소
+  postLikeDecrement = async (postNum) => {
+    await Posts.decrement({ like: 1 }, { where: { id: postNum } });
+    return;
+  };
 }
-
-// 게시글 좋아요
-likePost = async (postNum, userNum) => {
-  console.log("좋아요 확인");
-};
-
-// 게시글 좋아요 증가
-postLikeIncrement = async (postNum) => {
-  await Posts.increment({ like: 1 }, { where: { id: postNum } });
-};
-
-// 게시글 좋아요 감소
-postLikeDecrement = async (postNum) => {
-  await Posts.decrement({ like: 1 }, { where: { id: postNum } });
-};
 
 module.exports = PostsRepository;
