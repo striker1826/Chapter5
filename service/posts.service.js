@@ -10,6 +10,7 @@ class PostsService {
       title,
       content
     );
+
     return {
       userNum: createPostData.id,
       title: createPostData.title,

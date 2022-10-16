@@ -1,6 +1,6 @@
 const LikesRepository = require("../repository/likes.repository");
 const PostsRepository = require("../repository/posts.repository");
-
+const { Posts } = require("../models");
 class LikesService {
   likesRepository = new LikesRepository();
   postsRepository = new PostsRepository();
