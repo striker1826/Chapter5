@@ -5,7 +5,7 @@ class PostsService {
   postsRepository = new PostsRepository();
   commentsRepository = new CommentsRepository();
 
-  // 게시판 생성
+  // 게시글 생성
   createPost = async (id, title, content) => {
     const createPostData = await this.postsRepository.createPost(
       id,
@@ -22,15 +22,15 @@ class PostsService {
     };
   };
 
-  // 게시판 조회
+  // 게시글 조회
   findAllPost = async () => {
     const allPost = await this.postsRepository.findAllPost();
-    const allPostSort = allPost.sort((a, b) => b.id - a.id);
+    // const allPostSort = allPost.sort((a, b) => b.id - a.id);
 
     return allPostSort;
   };
 
-  // 게시판 상세 조회
+  // 게시글 상세 조회
   findPostById = async (postId) => {
     const findPost = await this.postsRepository.findPostById(postId);
     const findComments = await this.commentsRepository.getAllComments(postId);
@@ -41,7 +41,7 @@ class PostsService {
     return results;
   };
 
-  // 게시판 수정
+  // 게시글 수정
   updatePost = async (postId, title, content, id) => {
     console.log(postId, title, content, id);
     try {
@@ -60,7 +60,7 @@ class PostsService {
     }
   };
 
-  // 게시판 삭제
+  // 게시글 삭제
   deletePost = async (postId, id) => {
     try {
       const deletePost = await this.postsRepository.deletePost(postId, id);
