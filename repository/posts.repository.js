@@ -1,14 +1,14 @@
 const { Posts, sequelize } = require("../models");
 
 class PostsRepository {
-  // 게시판 생성
+  // 게시글 생성
   createPost = async (id, title, content) => {
     const createPost = await Posts.create({ userNum: id, title, content });
 
     return createPost;
   };
 
-  // 게시판 조회
+  // 게시글 조회
   findAllPost = async () => {
     // const allPost = await Posts.findAll();
     const [posts] = await sequelize.query(
