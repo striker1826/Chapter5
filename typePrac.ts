@@ -1,9 +1,22 @@
-type Add = {
-    (a: number, b: number ) : number;
-    (a: number, b: string ) : number;
+let a: number = 1;
+let b: string = "il"
+let c: boolean = true
+
+let d: number[] = [1, 2, 3]
+let e: string[] = ["a", "b"]
+
+type Player = {
+    name: string,
+    age?: number,
+    wins?: boolean
 }
 
-const  add:Add = (a, b) => {
-    if (typeof b === "string") return a
-    return a + b
+const playerKim: Player = {
+    name: "kim",
+    age: 27,
+    wins: true
+}
+
+const playerBaek: Player = {
+    name: "beak"
 }

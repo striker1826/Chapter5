@@ -12,7 +12,7 @@ class PostsRepository {
   findAllPost = async () => {
     // const allPost = await Posts.findAll();
     const [posts] = await sequelize.query(
-      "SELECT p.id, m.nickname, p.title, p.content, p.like, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id"
+      "SELECT p.id, m.nickname, p.title, p.content, p.likes, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id"
     );
 
     return posts;
@@ -22,7 +22,7 @@ class PostsRepository {
   findPostById = async (postId) => {
     // const post = await Posts.findByPk(postId);
     const [posts] = await sequelize.query(
-      "SELECT p.id, m.nickname, p.title, p.content, p.like, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id"
+      "SELECT p.id, m.nickname, p.title, p.content, p.likes, p.createdAt, p.updatedAt FROM Posts p INNER JOIN Members m ON p.userNum = m.id"
     );
 
     for (let i = 0; i < posts.length; i++) {
@@ -30,7 +30,7 @@ class PostsRepository {
         return posts[i];
       }
     }
-
+    console.log("repo: ", posts);
     return posts;
   };
 

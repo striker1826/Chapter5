@@ -10,15 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       postNum: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
+      },
+      commentNum: {
+        type: Sequelize.INTEGER,
       },
       userNum: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       comment: {
         type: Sequelize.STRING,
       },
-      like: {
+      likes: {
+        type: Sequelize.INTEGER,
+      },
+      level: {
         type: Sequelize.INTEGER,
       },
       createdAt: {
