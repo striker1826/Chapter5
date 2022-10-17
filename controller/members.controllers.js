@@ -7,7 +7,7 @@ class MembersController {
   createMembers = async (req, res, next) => {
     try {
       const { userId, nickname, password, confirmPw } = req.body;
-      
+
       const result = await this.MembersService.createMembers(
         userId,
         nickname,

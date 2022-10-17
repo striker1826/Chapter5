@@ -8,6 +8,10 @@ class CommentsController {
     const { comment, level } = req.body;
     const { id } = res.locals.user;
 
+    if (!comment) {
+      res.status(400).send("댓글 내용을 입력해 주세요");
+    }
+
     await this.commentService.createComment(
       postId,
       id,
@@ -15,7 +19,6 @@ class CommentsController {
       commentId,
       comment
     );
-    console.log("commentId: ", commentId);
     if (!commentId) {
       res.status(200).send("댓글이 생성되었습니다");
     } else {
