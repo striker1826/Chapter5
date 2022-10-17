@@ -7,13 +7,13 @@ class CommentsController {
     const { postId, commentId } = req.params;
     const { comment, level } = req.body;
     const { id } = res.locals.user;
-    if (!1 <= level && !2 >= level) {
-      res.status(400).send("입력이 올바른지 확인해 주세요");
-    }
-    if (!comment) {
-      res.status(400).send("댓글 내용을 입력해 주세요");
-    }
     try {
+      if (1 > level || 2 < level) {
+        return res.status(400).send("입력이 올바른지 확인해 주세요");
+      }
+      if (!comment) {
+        return res.status(400).send("댓글 내용을 입력해 주세요");
+      }
       await this.commentService.createComment(
         postId,
         id,
