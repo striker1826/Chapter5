@@ -10,7 +10,9 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
       },
       nickname: {
         type: Sequelize.STRING,
