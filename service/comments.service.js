@@ -27,7 +27,7 @@ class CommentsService {
   // };
 
   updateComment = async (commentId, userNum, comment) => {
-    await this.commentsRepository.updateComment(postNum, userNum, comment);
+    await this.commentsRepository.updateComment(commentId, userNum, comment);
     return;
   };
 

@@ -11,9 +11,9 @@ class CommentsRepository {
   //   return;
   // };
 
-  updateComment = async (postNum, userNum, comment) => {
+  updateComment = async (id, userNum, comment) => {
     try {
-      await Comments.update({ comment }, { where: { postNum, userNum } });
+      await Comments.update({ comment }, { where: { id, userNum } });
       return;
     } catch (err) {
       throw new Error(err.message);
