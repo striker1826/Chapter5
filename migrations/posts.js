@@ -11,12 +11,15 @@ module.exports = {
       },
       userNum: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       title: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       content: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       likes: {
         type: Sequelize.INTEGER,

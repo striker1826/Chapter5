@@ -38,14 +38,25 @@ class PostsService {
       postId,
       1
     );
+
+    // 대댓글 추출
+    const reComments = [];
+    findComments.map((comment) => {
+      comment.level === 2 ? reComments.push(comment) : false;
+    });
+
+    for (let i = 0; i < findComments.length; i++) {
+      findComments[i].id === reComments;
+    }
+
     const findRecomments =
       await this.commentsRepository.getAllCommentsWithLevel(postId, 2);
-    
+
     let commentsInFindPost = [];
-    for(let i = 0; i < findComments.length; i++) {
+    for (let i = 0; i < findComments.length; i++) {
       const reComment = [];
-      for(let j = 0; j < findRecomments.length; j++) {
-        if(findComments[i].id === findRecomments[j].commentNum) {
+      for (let j = 0; j < findRecomments.length; j++) {
+        if (findComments[i].id === findRecomments[j].commentNum) {
           reComment.push(findRecomments[j]);
         }
       }

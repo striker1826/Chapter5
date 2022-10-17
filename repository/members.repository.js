@@ -12,6 +12,26 @@ class MembersRepository {
     });
     return findOneMember;
   };
+
+  deleteMember = async (userId, password) => {
+    const deleteMember = await Members.destroy({
+      where: { userId, password },
+    });
+    return deleteMember;
+  };
+
+  updateMember = async (userId, nickname, password) => {
+    const updateMember = await Members.update(
+      { userId, nickname, password },
+      {
+        where: {
+          userId,
+          password,
+        },
+      }
+    );
+    return updateMember;
+  };
 }
 
 module.exports = MembersRepository;
