@@ -32,7 +32,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         validate: {
-          isIn: [[1, 2]],
+          is: /^[1-2]+$/,
         },
       },
       createdAt: {
