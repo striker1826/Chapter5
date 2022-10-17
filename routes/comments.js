@@ -12,7 +12,7 @@ router.post(
   commentsController.createComment
 );
 
-router.patch("/:postId", authMiddleware, commentsController.updateComment);
-router.delete("/:postId", authMiddleware, commentsController.deleteComment);
+router.patch("/:commentId", authMiddleware, commentsController.updateComment);
+router.delete("/:commentId", authMiddleware, commentsController.deleteComment);
 
 module.exports = router;
