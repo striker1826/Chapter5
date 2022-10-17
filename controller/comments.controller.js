@@ -8,47 +8,27 @@ class CommentsController {
     const { comment, level } = req.body;
     const { id } = res.locals.user;
 
-    if (!1 <= level || !2 >= level) {
-      res.status(400).send("입력이 올바른지 확인해 주세요");
-    }
-    if (!comment) {
-      res.status(400).send("댓글 내용을 입력해 주세요");
-    }
-
-    await this.commentService.createComment(
-      postId,
-      id,
-      level,
-      commentId,
-      comment
-    );
-    if (!commentId) {
-      res.status(200).send("댓글이 생성되었습니다");
-    } else {
-      res.status(200).send("대댓글이 생성되었습니다");
-
-      try {
-        if (1 > level || 2 < level) {
-          return res.status(400).send("입력이 올바른지 확인해 주세요");
-        }
-        if (!comment) {
-          return res.status(400).send("댓글 내용을 입력해 주세요");
-        }
-        await this.commentService.createComment(
-          postId,
-          id,
-          level,
-          commentId,
-          comment
-        );
-        if (!commentId) {
-          res.status(200).send("댓글이 생성되었습니다");
-        } else {
-          res.status(200).send("대댓글이 생성되었습니다");
-        }
-      } catch (e) {
-        res.json(e.message);
+    try {
+      if (1 > level || 2 < level) {
+        return res.status(400).send("입력이 올바른지 확인해 주세요");
       }
+      if (!comment) {
+        return res.status(400).send("댓글 내용을 입력해 주세요");
+      }
+      await this.commentService.createComment(
+        postId,
+        id,
+        level,
+        commentId,
+        comment
+      );
+      if (!commentId) {
+        res.status(200).send("댓글이 생성되었습니다");
+      } else {
+        res.status(200).send("대댓글이 생성되었습니다");
+      }
+    } catch (e) {
+      res.json(e.message);
     }
 
     // 대댓글
