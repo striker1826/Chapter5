@@ -26,7 +26,7 @@ class PostsService {
   // 게시글 조회
   findAllPost = async () => {
     const allPost = await this.postsRepository.findAllPost();
-    // const allPostSort = allPost.sort((a, b) => b.id - a.id);
+    const allPostSort = allPost.sort((a, b) => b.id - a.id);
 
     return allPostSort;
   };
