@@ -43,10 +43,10 @@ class CommentsController {
 
   updateComment = async (req, res, next) => {
     try {
-      const { postId } = req.params;
+      const { commentId } = req.params;
       const { comment } = req.body;
       const { id } = res.locals.user;
-      await this.commentService.updateComment(postId, id, comment);
+      await this.commentService.updateComment(commentId, id, comment);
       res.status(200).send("댓글이 수정되었습니다");
     } catch (err) {
       res.status(400).send("입력한 정보값이 올바른지 확인해 주세요");
@@ -54,14 +54,14 @@ class CommentsController {
   };
 
   deleteComment = async (req, res, next) => {
-    try {
-      const { postId } = req.params;
+    // try {
+      const { commentId } = req.params;
       const { id } = res.locals.user;
-      await this.commentService.deleteComment(postId, id);
+      const findOne = await this.commentService.deleteComment(commentId, id);
       res.status(200).send("댓글이 삭제되었습니다");
-    } catch (err) {
-      throw new Error(err.message);
-    }
+    // } catch (err) {
+    //   throw new Error(err.message);
+    // }
   };
 }
 
