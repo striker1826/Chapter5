@@ -49,5 +49,15 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Posts",
     }
   );
+
+  Posts.associate = function (models) {
+    models.Posts.belongsTo(models.Members, {
+      onDelete: 'cacade',
+      forignKey: {
+        allowNull: true,
+      }
+    })
+  };
+
   return Posts;
 };
