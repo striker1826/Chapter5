@@ -53,12 +53,12 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
     });
 
-    models.Members.hasMany(models.Users, {
+    models.Members.hasMany(models.Comments, {
       foreignKey: 'id',
       onDelete: 'cascade',
     });
 
-    mocdels.Members.hasMany(models.Likes, {
+    models.Members.hasMany(models.Likes, {
       foreignKey: 'id',
       onDelete: 'cascade',
     });

@@ -62,11 +62,15 @@ module.exports = (sequelize, DataTypes) => {
 
   Comments.associate = function (models) {
     models.Comments.belongsTo(models.Members, {
-      onDelete: 'cacade',
+      onDelete: 'cascade',
       forignKey: {
         allowNull: true,
       }
-    })
+    });
+    models.Comments.hasMany(models.Comments, {
+      foreignKey: 'id',
+      onDelete: 'cascade',
+    });
   };
   return Comments;
 };
