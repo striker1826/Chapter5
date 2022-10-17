@@ -5,9 +5,9 @@ const key = "신기하다";
 
 function pbkdf2(password, salt, iterations, len, hashType) {
   return new Promise((resolve, reject) => {
-      crypto.pbkdf2(password, salt, iterations, len, hashType, (err, key) => {
-          err ? reject(err) : resolve(key.toString('base64'));
-      });
+    crypto.pbkdf2(password, salt, iterations, len, hashType, (err, key) => {
+      err ? reject(err) : resolve(key.toString("base64"));
+    });
   });
 }
 
@@ -18,7 +18,7 @@ class MembersController {
     try {
       const { userId, nickname, password, confirmPw } = req.body;
       const hashPassword = await pbkdf2(password, key, 195878, 141, "sha512");
-      const result = await this.MembersService.createMembers(
+      await this.MembersService.createMembers(
         userId,
         nickname,
         hashPassword,

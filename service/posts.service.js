@@ -1,5 +1,6 @@
 const PostsRepository = require("../repository/posts.repository");
 const CommentsRepository = require("../repository/comments.repository");
+const comments = require("../migrations/comments");
 
 class PostsService {
   postsRepository = new PostsRepository();
@@ -33,12 +34,41 @@ class PostsService {
   // 게시글 상세 조회
   findPostById = async (postId) => {
     const findPost = await this.postsRepository.findPostById(postId);
-    const findComments = await this.commentsRepository.getAllComments(postId);
+    const findComments = await this.commentsRepository.getAllComments(
+      postId,
+      1
+    );
+    const reComments = [];
+    const findRecomments = findComments.map((comment) => {
+      comment.level === 2 ? reComments.push(comment) : false;
+    });
+
+    let result = [];
+    for (let i = 0; i < findComments.length; i++) {
+      let reComment = [];
+      for (let j = 0; j < reComments.length; j++) {
+        if (reComments[j].commentNum === findComments[i].id) {
+          reComment.push(reComments[j]);
+        }
+      }
+      result.push({
+        id: findComments[i].id,
+        postNum: findComments[i].postNum,
+        commentNum: findComments[i].commentNum,
+        userNum: findComments[i].userNum,
+        comment: findComments[i].comment,
+        level: findComments[i].level,
+        createdAt: findComments[i].createdAt,
+        updatedAt: findComments[i].updatedAt,
+        child: reComment,
+      });
+    }
+
     const results = {
       findPost,
       findComments,
     };
-    return results;
+    return result;
   };
 
   // 게시글 수정
