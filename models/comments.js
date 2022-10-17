@@ -21,7 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       commentNum: DataTypes.INTEGER,
       userNum: DataTypes.INTEGER,
       comment: DataTypes.STRING,
-      level: DataTypes.INTEGER,
+      level: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      }
     },
     {
       sequelize,
