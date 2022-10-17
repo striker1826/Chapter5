@@ -1,15 +1,5 @@
 const MembersService = require("../service/members.service");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const key = "신기하다";
-
-function pbkdf2(password, salt, iterations, len, hashType) {
-  return new Promise((resolve, reject) => {
-      crypto.pbkdf2(password, salt, iterations, len, hashType, (err, key) => {
-          err ? reject(err) : resolve(key.toString('base64'));
-      });
-  });
-}
 
 class MembersController {
   MembersService = new MembersService();
@@ -17,16 +7,16 @@ class MembersController {
   createMembers = async (req, res, next) => {
     try {
       const { userId, nickname, password, confirmPw } = req.body;
-      const hashPassword = await pbkdf2(password, key, 195878, 141, "sha512");
+      
       const result = await this.MembersService.createMembers(
         userId,
         nickname,
-        hashPassword,
+        password,
         confirmPw
       );
       res.send("회원가입에 성공했습니다");
     } catch (e) {
-      res.json(e);
+      res.json(e.message);
     }
   };
 
