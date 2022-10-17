@@ -30,7 +30,7 @@ class CommentsController {
     } catch (e) {
       res.json(e.message);
     }
-
+  };
     // 대댓글
     // createRecomment = async (req, res, next) => {
     //   const { postId, commentId } = req.params;
@@ -59,16 +59,16 @@ class CommentsController {
     };
 
     deleteComment = async (req, res, next) => {
-      // try {
+      try {
       const { commentId } = req.params;
       const { id } = res.locals.user;
       await this.commentService.deleteComment(commentId, id);
       res.status(200).send("댓글이 삭제되었습니다");
-      // } catch (err) {
-      //   throw new Error(err.message);
-      // }
+      } catch (err) {
+        throw new Error(err.message);
+      }
     };
-  };
+  
 }
 
 module.exports = CommentsController;
