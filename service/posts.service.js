@@ -38,37 +38,16 @@ class PostsService {
       postId,
       1
     );
+
+    // 대댓글 추출
     const reComments = [];
-    const findRecomments = findComments.map((comment) => {
+    findComments.map((comment) => {
       comment.level === 2 ? reComments.push(comment) : false;
     });
 
-    let result = [];
     for (let i = 0; i < findComments.length; i++) {
-      let reComment = [];
-      for (let j = 0; j < reComments.length; j++) {
-        if (reComments[j].commentNum === findComments[i].id) {
-          reComment.push(reComments[j]);
-        }
-      }
-      result.push({
-        id: findComments[i].id,
-        postNum: findComments[i].postNum,
-        commentNum: findComments[i].commentNum,
-        userNum: findComments[i].userNum,
-        comment: findComments[i].comment,
-        level: findComments[i].level,
-        createdAt: findComments[i].createdAt,
-        updatedAt: findComments[i].updatedAt,
-        child: reComment,
-      });
+      findComments[i].id === reComments;
     }
-
-    const results = {
-      findPost,
-      findComments,
-    };
-    return result;
   };
 
   // 게시글 수정
