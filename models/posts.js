@@ -50,14 +50,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Posts.associate = function (models) {
-    models.Posts.belongsTo(models.Members, {
-      onDelete: 'cacade',
-      forignKey: {
-        allowNull: true,
-      }
-    })
-  };
+  // Posts.associate = function (models) {
+  //   models.Posts.belongsTo(models.Members, {
+  //     onDelete: 'cacade',
+  //     forignKey: {
+  //       allowNull: true,
+  //     }
+  //   })
+  // };
 
   return Posts;
 };

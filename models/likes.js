@@ -42,13 +42,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Likes.associate = function (models) {
-    models.Likes.belongsTo(models.Members, {
-      onDelete: 'cacade',
-      forignKey: {
-        allowNull: true,
-      }
-    })
-  };
+  // Likes.associate = function (models) {
+  //   models.Likes.belongsTo(models.Members, {
+  //     onDelete: 'cacade',
+  //     forignKey: {
+  //       allowNull: true,
+  //     }
+  //   })
+  // };
   return Likes;
 };
