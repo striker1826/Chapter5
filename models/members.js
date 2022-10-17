@@ -26,5 +26,22 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Members",
     }
   );
+
+  Members.associate = function (models) {
+    models.Members.hasMany(models.Posts, {
+      foreignKey: 'id',
+      onDelete: 'cascade',
+    });
+
+    models.Members.hasMany(models.Users, {
+      foreignKey: 'id',
+      onDelete: 'cascade',
+    });
+
+    mocdels.Members.hasMany(models.Likes, {
+      foreignKey: 'id',
+      onDelete: 'cascade',
+    });
+  };
   return Members;
 };

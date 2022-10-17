@@ -28,5 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Comments",
     }
   );
+
+  Comments.associate = function (models) {
+    models.Comments.belongsTo(models.Members, {
+      onDelete: 'cacade',
+      forignKey: {
+        allowNull: true,
+      }
+    })
+  };
   return Comments;
 };
