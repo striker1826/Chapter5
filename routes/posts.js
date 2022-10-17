@@ -9,9 +9,9 @@ const postsController = new PostsController();
 // 게시글 생성
 router.post("/", authMiddleware, postsController.createPost);
 // 게시글 조회
-router.get('/', postsController.getPosts);
+router.get("/", postsController.getPosts);
 // 게시글 상세조회
-router.get('/:postId', postsController.getPostById);
+router.get("/:postId", postsController.getPostById);
 // 게시글 수정
 router.patch("/:postId", authMiddleware, postsController.updatepost);
 // 게시글 삭제

@@ -8,7 +8,7 @@ const routes = require("./routes");
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/', routes);
+app.use("/", routes);
 
 app.use("/", (req, res) => {
   res.send("hello");

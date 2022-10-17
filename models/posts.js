@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Posts extends Model {
     /**
      * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
+     * This method is not a part of DataTypes lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
@@ -14,15 +14,34 @@ module.exports = (sequelize, DataTypes) => {
   Posts.init(
     {
       id: {
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      userNum: DataTypes.INTEGER,
-      title: DataTypes.STRING,
-      content: DataTypes.STRING,
+      userNum: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      content: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       likes: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
+      },
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
       },
     },
     {

@@ -11,9 +11,11 @@ module.exports = {
       },
       postNum: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       userNum: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

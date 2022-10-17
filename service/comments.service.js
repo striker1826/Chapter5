@@ -2,10 +2,10 @@ const comments = require("../migrations/comments");
 const CommentsRepository = require("../repository/comments.repository");
 
 class CommentsService {
-  CommentsRepository = new CommentsRepository();
+  commentsRepository = new CommentsRepository();
 
   createComment = async (postNum, userNum, level, commentId, comment) => {
-    await this.CommentsRepository.createComment(
+    await this.commentsRepository.createComment(
       postNum,
       userNum,
       level,
@@ -16,7 +16,7 @@ class CommentsService {
   };
 
   // createRecomment = async (postId, id, level, commentId, comment) => {
-  //   const createRecomment = await this.CommentsRepository.createRecomment(
+  //   const createRecomment = await this.commentsRepository.createRecomment(
   //     postId,
   //     id,
   //     level,
@@ -26,14 +26,20 @@ class CommentsService {
   //   return createRecomment;
   // };
 
-  updateComment = async (postNum, userNum, comment) => {
-    await this.CommentsRepository.updateComment(postNum, userNum, comment);
+  updateComment = async (commentId, userNum, comment) => {
+    await this.commentsRepository.updateComment(commentId, userNum, comment);
     return;
   };
 
-  deleteComment = async (postNum, userNum) => {
-    await this.CommentsRepository.deleteComment(postNum, userNum);
-    return;
+  deleteComment = async (commentId, userNum) => {
+    const findOneComment = await this.commentsRepository.findOneComment(commentId);
+    if(findOneComment.level === 1) {      
+      await this.commentsRepository.deleteComment(commentId, userNum);
+      await this.commentsRepository.deleteReCommentCasCade(commentId);
+    } else {
+      await this.commentsRepository.deleteComment(commentId, userNum);
+    }
+    return findOneComment;
   };
 }
 

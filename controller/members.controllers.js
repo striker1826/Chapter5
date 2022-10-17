@@ -1,38 +1,35 @@
 const MembersService = require("../service/members.service");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const key = "신기하다";
-
-function pbkdf2(password, salt, iterations, len, hashType) {
-  return new Promise((resolve, reject) => {
-      crypto.pbkdf2(password, salt, iterations, len, hashType, (err, key) => {
-          err ? reject(err) : resolve(key.toString('base64'));
-      });
-  });
-}
 
 class MembersController {
   MembersService = new MembersService();
 
   createMembers = async (req, res, next) => {
+    if (req.headers.authorization) {
+      res.status(400).send("로그인이 이미 되어있습니다");
+      return;
+    }
     try {
       const { userId, nickname, password, confirmPw } = req.body;
-      const hashPassword = await pbkdf2(password, key, 195878, 141, "sha512");
+
       const result = await this.MembersService.createMembers(
         userId,
         nickname,
-        hashPassword,
+        password,
         confirmPw
       );
       res.send("회원가입에 성공했습니다");
     } catch (e) {
-      res.json(e);
+      res.json(e.message);
     }
   };
 
   loginMembers = async (req, res, next) => {
     const { userId, password } = req.body;
-
+    if (req.headers.authorization) {
+      res.status(400).send("로그인이 이미 되어있습니다");
+      return;
+    }
     try {
       const user = await this.MembersService.findOneMember(userId, password);
 
@@ -44,6 +41,26 @@ class MembersController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ errorMessage: e.message });
+    }
+  };
+
+  deleteMember = async (req, res, next) => {
+    try {
+      const { userId, password } = req.body;
+      await this.MembersService.deleteMember(userId, password);
+      res.status(200).send("회원정보가 삭제되었습니다");
+    } catch (err) {
+      res.status(400).send("입력하신 정보가 올바른지 확인해주세요");
+    }
+  };
+
+  updateMember = async (req, res, next) => {
+    try {
+      const { userId, nickname, password } = req.body;
+      await this.MembersService.updateMember(userId, nickname, password);
+      res.status(200).send("회원정보가 수정되었습니다");
+    } catch (err) {
+      res.status(400).send("입력하신 정보가 올바른지 확인해주세요");
     }
   };
 }

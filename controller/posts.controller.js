@@ -24,7 +24,6 @@ class PostsController {
   getPostById = async (req, res, next) => {
     const { postId } = req.params;
     const findPost = await this.PostsService.findPostById(postId);
-    console.log("cont: ", findPost);
     res.status(200).send(findPost);
   };
 

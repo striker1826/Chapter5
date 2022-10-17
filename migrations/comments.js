@@ -11,21 +11,29 @@ module.exports = {
       },
       postNum: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       commentNum: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       userNum: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       comment: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       likes: {
         type: Sequelize.INTEGER,
       },
       level: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          is: /^[1-2]+$/,
+        },
       },
       createdAt: {
         allowNull: false,
