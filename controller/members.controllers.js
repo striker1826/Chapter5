@@ -5,6 +5,10 @@ class MembersController {
   MembersService = new MembersService();
 
   createMembers = async (req, res, next) => {
+    if (req.headers.authorization) {
+      res.status(400).send("로그인이 이미 되어있습니다");
+      return;
+    }
     try {
       const { userId, nickname, password, confirmPw } = req.body;
 
@@ -22,7 +26,10 @@ class MembersController {
 
   loginMembers = async (req, res, next) => {
     const { userId, password } = req.body;
-
+    if (req.headers.authorization) {
+      res.status(400).send("로그인이 이미 되어있습니다");
+      return;
+    }
     try {
       const user = await this.MembersService.findOneMember(userId, password);
 

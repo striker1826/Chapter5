@@ -32,7 +32,10 @@ class MembersService {
       );
     }
 
-    const findOneMember = await this.membersRepository.findOneMember(userId);
+    const findOneMember = await this.membersRepository.findOneMember(
+      userId,
+      password
+    );
 
     if (findOneMember && userId === findOneMember.userId) {
       throw new Error("이미 존재하는 아이디입니다.");
@@ -62,7 +65,11 @@ class MembersService {
 
   findOneMember = async (userId, password) => {
     const hashPassword = await pbkdf2(password, key, 195878, 141, "sha512");
-    const findOneMember = await this.membersRepository.findOneMember(userId);
+    console.log(hashPassword);
+    const findOneMember = await this.membersRepository.findOneMember(
+      userId,
+      hashPassword
+    );
 
     if (!findOneMember || hashPassword !== findOneMember.password) {
       throw new Error("닉네임 또는 패스워드를 확인해주세요.");
