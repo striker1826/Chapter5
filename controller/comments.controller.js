@@ -7,6 +7,26 @@ class CommentsController {
     const { postId, commentId } = req.params;
     const { comment, level } = req.body;
     const { id } = res.locals.user;
+<<<<<<< HEAD
+    if (!1 <= level || !2 >= level) {
+      res.status(400).send("입력이 올바른지 확인해 주세요");
+    }
+    if (!comment) {
+      res.status(400).send("댓글 내용을 입력해 주세요");
+    }
+
+    await this.commentService.createComment(
+      postId,
+      id,
+      level,
+      commentId,
+      comment
+    );
+    if (!commentId) {
+      res.status(200).send("댓글이 생성되었습니다");
+    } else {
+      res.status(200).send("대댓글이 생성되었습니다");
+=======
     try {
       if (1 > level || 2 < level) {
         return res.status(400).send("입력이 올바른지 확인해 주세요");
@@ -28,6 +48,7 @@ class CommentsController {
       }
     } catch (e) {
       res.json(e.message);
+>>>>>>> 9b015274ae8f75372e8f89b811697e58e4271bc2
     }
   };
 
