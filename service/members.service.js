@@ -19,6 +19,9 @@ class MembersService {
   membersRepository = new membersRepository();
 
   createMembers = async (userId, nickname, password, confirmPw) => {
+    if (userId.includes(password)) {
+      throw new Error("아이디와 비밀번호가 조건에 맞는지 확인해 주세요");
+    }
     if (!userIdReg.test(userId)) {
       throw new Error(
         "아이디는 3~20자의 영문(대,소문자) 및 숫자 조합으로 생성 가능합니다."

@@ -7,22 +7,27 @@ class CommentsController {
     const { postId, commentId } = req.params;
     const { comment, level } = req.body;
     const { id } = res.locals.user;
-
+    if (!1 <= level && !2 >= level) {
+      res.status(400).send("입력이 올바른지 확인해 주세요");
+    }
     if (!comment) {
       res.status(400).send("댓글 내용을 입력해 주세요");
     }
-
-    await this.commentService.createComment(
-      postId,
-      id,
-      level,
-      commentId,
-      comment
-    );
-    if (!commentId) {
-      res.status(200).send("댓글이 생성되었습니다");
-    } else {
-      res.status(200).send("대댓글이 생성되었습니다");
+    try {
+      await this.commentService.createComment(
+        postId,
+        id,
+        level,
+        commentId,
+        comment
+      );
+      if (!commentId) {
+        res.status(200).send("댓글이 생성되었습니다");
+      } else {
+        res.status(200).send("대댓글이 생성되었습니다");
+      }
+    } catch (e) {
+      res.json(e.message);
     }
   };
 
@@ -55,10 +60,10 @@ class CommentsController {
 
   deleteComment = async (req, res, next) => {
     // try {
-      const { commentId } = req.params;
-      const { id } = res.locals.user;
-      const findOne = await this.commentService.deleteComment(commentId, id);
-      res.status(200).send("댓글이 삭제되었습니다");
+    const { commentId } = req.params;
+    const { id } = res.locals.user;
+    const findOne = await this.commentService.deleteComment(commentId, id);
+    res.status(200).send("댓글이 삭제되었습니다");
     // } catch (err) {
     //   throw new Error(err.message);
     // }
