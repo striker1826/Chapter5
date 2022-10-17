@@ -1,6 +1,6 @@
 "use strict";
-const { Model } = require("DataTypes");
-module.exports = (DataTypes, DataTypes) => {
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
   class Comments extends Model {
     /**
      * Helper method for defining associations.
@@ -25,7 +25,7 @@ module.exports = (DataTypes, DataTypes) => {
       },
       commentNum: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       userNum: {
         type: DataTypes.INTEGER,
@@ -42,7 +42,7 @@ module.exports = (DataTypes, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          isIn: [[1, 2]],
+          is: /^[1-2]+$/,
         },
       },
       createdAt: {
@@ -55,7 +55,7 @@ module.exports = (DataTypes, DataTypes) => {
       },
     },
     {
-      DataTypes,
+      sequelize,
       modelName: "Comments",
     }
   );
