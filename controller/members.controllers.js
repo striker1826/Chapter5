@@ -43,6 +43,12 @@ class MembersController {
       res.status(400).json({ errorMessage: e.message });
     }
   };
+
+  deleteMember = async (req, res, next) => {
+    const { userId, password } = req.body;
+    await this.MembersService.deleteMember(userId, password);
+    res.status(200).send("댓글이 삭제되었습니다");
+  };
 }
 
 module.exports = MembersController;

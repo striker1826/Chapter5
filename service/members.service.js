@@ -4,6 +4,7 @@ const userIdReg = /^[a-zA-Z0-9]{3,20}$/;
 const passwordReg = /^[a-zA-Z0-9]{4,20}$/;
 
 const crypto = require("crypto");
+
 const key = process.env.ENCRYPTED_KEY;
 
 function pbkdf2(password, salt, iterations, len, hashType) {
@@ -75,6 +76,15 @@ class MembersService {
       throw new Error("닉네임 또는 패스워드를 확인해주세요.");
     }
     return findOneMember;
+  };
+
+  deleteMember = async (userId, password) => {
+    const hashPassword = await pbkdf2(password, key, 195878, 141, "sha512");
+    const deleteMember = await this.membersRepository.deleteMember(
+      userId,
+      hashPassword
+    );
+    return deleteMember;
   };
 }
 
