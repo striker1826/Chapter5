@@ -29,9 +29,9 @@ class CommentsRepository {
     }
   };
 
-  getAllComments = async (postNum) => {
+  getAllCommentsWithLevel = async (postNum, level) => {
     try {
-      const test = await Comments.findAll({ where: { postNum } });
+      const test = await Comments.findAll({ where: { postNum, level } });
       return test;
     } catch (err) {
       throw new Error(err.message);

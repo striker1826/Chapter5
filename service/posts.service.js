@@ -34,7 +34,7 @@ class PostsService {
   // 게시글 상세 조회
   findPostById = async (postId) => {
     const findPost = await this.postsRepository.findPostById(postId);
-    const findComments = await this.commentsRepository.getAllComments(
+    const findComments = await this.commentsRepository.getAllCommentsWithLevel(
       postId,
       1
     );
@@ -48,6 +48,36 @@ class PostsService {
     for (let i = 0; i < findComments.length; i++) {
       findComments[i].id === reComments;
     }
+
+    const findRecomments =
+      await this.commentsRepository.getAllCommentsWithLevel(postId, 2);
+
+    let commentsInFindPost = [];
+    for (let i = 0; i < findComments.length; i++) {
+      const reComment = [];
+      for (let j = 0; j < findRecomments.length; j++) {
+        if (findComments[i].id === findRecomments[j].commentNum) {
+          reComment.push(findRecomments[j]);
+        }
+      }
+      commentsInFindPost.push({
+        id: findComments[i].id,
+        postNum: findComments[i].postNum,
+        commentNum: findComments[i].commentNum,
+        userNum: findComments[i].userNum,
+        comment: findComments[i].comment,
+        level: findComments[i].level,
+        createdAt: findComments[i].createdAt,
+        updatedAt: findComments[i].updatedAt,
+        child: reComment,
+      });
+    }
+
+    const results = {
+      findPost,
+      commentsInFindPost,
+    };
+    return results;
   };
 
   // 게시글 수정

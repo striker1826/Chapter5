@@ -7,7 +7,7 @@ const PostsController = require("../controller/posts.controller");
 const postsController = new PostsController();
 
 // 게시글 생성
-router.post("/", authMiddleware, postsController.createPost);
+router.post("/post", authMiddleware, postsController.createPost);
 // 게시글 조회
 router.get('/', postsController.getPosts);
 // 게시글 상세조회
