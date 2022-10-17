@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express";
+import router from './routes'
 const app = express();
 
-app.use('/', (req:Request, res:Response) => {
-    res.send('안녕')
-})
+app.use('/', router)
 
 app.listen(3000, () => {
     console.log('안녕')

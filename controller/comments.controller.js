@@ -7,7 +7,7 @@ class CommentsController {
     const { postId, commentId } = req.params;
     const { comment, level } = req.body;
     const { id } = res.locals.user;
-    if (!1 <= level && !2 >= level) {
+    if (!1 <= level || !2 >= level) {
       res.status(400).send("입력이 올바른지 확인해 주세요");
     }
     if (!comment) {
