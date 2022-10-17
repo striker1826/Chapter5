@@ -19,6 +19,19 @@ class MembersRepository {
     });
     return deleteMember;
   };
+
+  updateMember = async (userId, nickname, password) => {
+    const updateMember = await Members.update(
+      { userId, nickname, password },
+      {
+        where: {
+          userId,
+          password,
+        },
+      }
+    );
+    return updateMember;
+  };
 }
 
 module.exports = MembersRepository;

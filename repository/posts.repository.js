@@ -36,7 +36,6 @@ class PostsRepository {
 
   // 게시판 수정
   updatePost = async (postId, title, content, id) => {
-    console.log("repo: ", postId, title, content, id);
     const updatePost = Posts.update(
       { title, content },
       { where: { id: postId, userNum: id } }
