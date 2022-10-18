@@ -5,7 +5,7 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "database-1.czzfpqy3oobx.ap-northeast-2.rds.amazonaws.com",
+  "host": "",
   "basePath": "/",
   "schemes": [
     "http"
