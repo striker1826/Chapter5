@@ -62,7 +62,7 @@ class CommentsController {
     try {
       const { commentId } = req.params;
       const { id } = res.locals.user;
-      await this.commentService.deleteComment(commentId, id);
+      await this.commentService.deleteComment(id, commentId);
       res.status(200).send("댓글이 삭제되었습니다");
     } catch (err) {
       throw new Error(err.message);
