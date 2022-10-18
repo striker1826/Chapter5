@@ -333,7 +333,7 @@
           {
             "name": "userNum",
             "in": "header",
-            "type": "string",
+            "type": "number",
             "description": "유저 번호"
           },
           {
@@ -416,13 +416,13 @@
             "name": "postId",
             "in": "path",
             "required": true,
-            "type": "string",
+            "type": "number",
             "description": "게시글 ID"
           },
           {
             "name": "userNum",
             "in": "header",
-            "type": "string",
+            "type": "number",
             "description": "유저 번호"
           }
         ],
@@ -451,7 +451,7 @@
           {
             "name": "userNum",
             "in": "header",
-            "type": "string",
+            "type": "number",
             "description": "유저 번호"
           }
         ],
@@ -475,7 +475,7 @@
           {
             "name": "userNum",
             "in": "header",
-            "type": "string",
+            "type": "number",
             "description": "유저 번호"
           }
         ],
