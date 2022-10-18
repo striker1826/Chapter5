@@ -5,6 +5,16 @@ class MembersController {
   MembersService = new MembersService();
 
   createMembers = async (req, res, next) => {
+    /**
+     *  @swagger
+     * /customers:
+     * post:
+     * tag: Members
+     *  description: 회원가입 기능입니다
+     *  response:
+     *  200:
+     * description: 회원가입이 되었습니다
+     */
     if (req.headers.authorization) {
       res.status(400).send("로그인이 이미 되어있습니다");
       return;
