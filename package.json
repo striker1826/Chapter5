@@ -6,7 +6,7 @@
   "scripts": {
     "create_db": "ts-node src/migrations/create-db.ts",
     "test": "jest",
-    "start": "test.js",
+    "start": "node app.js",
     "build": "tsc",
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/app.ts"
   },
@@ -34,6 +34,7 @@
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.0",
     "@types/validator": "^13.7.8",
+    "jest": "^29.2.0",
     "nodemon": "^2.0.20",
     "sequelize-cli": "^6.5.1",
     "supertest": "^6.3.0",
