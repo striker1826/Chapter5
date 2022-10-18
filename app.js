@@ -26,6 +26,5 @@ app.use("/", (req, res) => {
 app.listen(3000, (req, res) => {
   console.log(`${port}번으로 열렸습니다`);
 });
-// git test
 
 module.exports = app;
