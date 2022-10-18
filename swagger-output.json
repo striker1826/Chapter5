@@ -148,48 +148,93 @@
     },
     "/posts/": {
       "post": {
-        "description": "",
+        "description": "게시글 작성 API",
         "parameters": [
           {
-            "name": "authorization",
+            "name": "userNum",
             "in": "header",
-            "type": "string"
+            "type": "string",
+            "description": "유저 번호"
+          },
+          {
+            "name": "title",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "글 제목"
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "글 내용"
           }
         ],
         "responses": {
+          "201": {
+            "description": "게시글이 작성되었습니다."
+          },
           "400": {
-            "description": "Bad Request"
+            "description": "게시글 작성에 실패했습니다."
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized(로그인 안 된 상태)"
           }
         }
       },
       "get": {
-        "description": "",
+        "description": "게시글 조회 API",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "게시글들을 조회했습니다."
+          },
+          "400": {
+            "description": "게시글 조회에 실패했습니다."
+          }
+        }
       }
     },
     "/posts/{postId}": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "description": "게시글 상세 조회",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "header",
+            "type": "string",
+            "description": "게시글 ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "게시글을 상세 조회했습니다."
+          },
+          "400": {
+            "description": "게시글 상세 조회에 실패했습니다."
+          }
+        }
       },
       "patch": {
-        "description": "",
+        "description": "게시글 수정 API - 해당 게시글의 작성자만 수정할 수 있습니다.",
         "parameters": [
           {
             "name": "postId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "게시글 ID"
           },
           {
-            "name": "authorization",
+            "name": "userNum",
             "in": "header",
-            "type": "string"
+            "type": "string",
+            "description": "유저 번호"
           }
         ],
         "responses": {
@@ -202,18 +247,20 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "게시글 삭제 API - 해당 게시글의 작성자만 수정할 수 있습니다.",
         "parameters": [
           {
             "name": "postId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "게시글 번호"
           },
           {
-            "name": "authorization",
+            "name": "userNum",
             "in": "header",
-            "type": "string"
+            "type": "string",
+            "description": "유저 번호"
           }
         ],
         "responses": {
@@ -228,12 +275,13 @@
     },
     "/likes/posts": {
       "get": {
-        "description": "",
+        "description": "좋아요한 게시글 조회 API - 로그인한 유저가 좋아요한 게시글들을 보여줍니다.",
         "parameters": [
           {
-            "name": "authorization",
+            "name": "userNum",
             "in": "header",
-            "type": "string"
+            "type": "string",
+            "description": "유저 번호"
           }
         ],
         "responses": {
@@ -248,18 +296,20 @@
     },
     "/likes/posts/{postId}": {
       "put": {
-        "description": "",
+        "description": "게시글 좋아요 API",
         "parameters": [
           {
             "name": "postId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "게시글 번호"
           },
           {
-            "name": "authorization",
+            "name": "userNum",
             "in": "header",
-            "type": "string"
+            "type": "string",
+            "description": "유저 번호"
           }
         ],
         "responses": {
