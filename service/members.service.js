@@ -35,17 +35,15 @@ class MembersService {
         "비밀번호는 4~20자의 영문(대,소문자) 및 숫자 조합으로 생성 가능합니다."
       );
     }
-
-    const findOneMember = await this.membersRepository.findOneMember(
-      userId,
-      password
+    const findOneMember = await this.membersRepository.findMemberByUserId(
+      userId
     );
 
-    console.log(findOneMember);
-    if (findOneMember && userId === findOneMember.userId) {
+    if (findOneMember) {
       throw new Error("이미 존재하는 아이디입니다.");
     } else {
       try {
+
         const hashPassword = await pbkdf2(password, key, 195878, 141, "sha512");
         const createdMember = await this.membersRepository.createMembers(
           userId,
