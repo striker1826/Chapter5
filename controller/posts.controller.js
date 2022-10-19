@@ -17,7 +17,7 @@ class PostsController {
   getPosts = async (req, res, next) => {
     const posts = await this.PostsService.findAllPost();
 
-    res.status(200).json({ data: posts });
+    res.status(200).send(posts);
   };
 
   // 게시판 상세 조회

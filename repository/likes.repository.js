@@ -28,7 +28,7 @@ class LikesRepository {
 
   getAllLikePosts = async (userId) => {
     const [likeArr] = await sequelize.query(
-      "SELECT l.postNum, l.userNum, m.nickname, p.title, p.`like`, l.createdAt, l.updatedAt FROM Posts p LEFT JOIN Likes l ON p.id = l.postNum LEFT JOIN Members m ON l.userNum = m.id WHERE postNum is not null"
+      "SELECT l.postNum, l.userNum, m.nickname, p.title, p.likes, l.createdAt, l.updatedAt FROM Posts p LEFT JOIN Likes l ON p.id = l.postNum LEFT JOIN Members m ON l.userNum = m.id WHERE postNum is not null"
     );
 
     // const myLikeArr = [];

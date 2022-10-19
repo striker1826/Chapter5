@@ -50,7 +50,7 @@ class CommentsService {
     );
     if (findOneComment.level === 1) {
       await this.commentsRepository.deleteComment(commentId, userNum);
-      await this.commentsRepository.deleteReCommentCasCade(commentId);
+      await this.commentsRepository.deleteReCommentCasCade(commentId, userNum);
     } else {
       await this.commentsRepository.deleteComment(commentId, userNum);
     }
