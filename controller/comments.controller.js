@@ -52,15 +52,10 @@ class CommentsController {
       const { comment, level } = req.body;
       const { id } = res.locals.user;
 
-      if (level) {
-        res.status(400).send("레벨값은 입력할 수 없습니다");
-        return;
-      }
-
-      await this.commentService.updateComment(commentId, id, comment);
+      await this.commentService.updateComment(commentId, id, comment, level);
       res.status(200).send("댓글이 수정되었습니다");
     } catch (err) {
-      res.status(400).send("입력한 정보값이 올바른지 확인해 주세요");
+      res.json(err.message);
     }
   };
 
@@ -71,7 +66,7 @@ class CommentsController {
       await this.commentService.deleteComment(commentId, id);
       res.status(200).send("댓글이 삭제되었습니다");
     } catch (err) {
-      throw new Error(err.message);
+      res.json(err.message);
     }
   };
 }

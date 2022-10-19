@@ -20,7 +20,7 @@ class MembersService {
 
   createMembers = async (userId, nickname, password, confirmPw) => {
     if (userId.includes(password)) {
-      throw new Error("아이디와 비밀번호가 조건에 맞는지 확인해 주세요");
+      throw new Erreor("아이디와 비밀번호가 조건에 맞는지 확인해 주세요");
     }
     if (!userIdReg.test(userId)) {
       throw new Error(
