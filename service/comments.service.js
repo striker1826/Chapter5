@@ -53,13 +53,6 @@ class CommentsService {
       userNum
     );
     try {
-      if (findOneComment) {
-        throw new Error();
-      }
-    } catch (err) {
-      return "존재하지 않는 댓글입니다";
-    }
-    try {
       console.log("ssssss: ", findOneComment.level);
       if (findOneComment.level === 1) {
         await this.commentsRepository.deleteComment(commentId, userNum);
@@ -72,7 +65,7 @@ class CommentsService {
       }
       return findOneComment;
     } catch (err) {
-      throw new Error(err);
+      throw Error(err);
     }
   };
 }
