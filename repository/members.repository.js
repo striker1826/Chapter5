@@ -6,6 +6,11 @@ class MembersRepository {
     return createMembers;
   };
 
+  findMemberByUserId = async (userId) => {{
+    const findOneMember = await Members.findOne({where:{ userId }});
+    return findOneMember;
+  }}
+
   findOneMember = async (userId, password) => {
     const findOneMember = await Members.findOne({
       where: { userId, password },
