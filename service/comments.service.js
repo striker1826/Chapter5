@@ -42,9 +42,23 @@ class CommentsService {
   //   return createRecomment;
   // };
 
-  updateComment = async (commentId, userNum, comment) => {
-    await this.commentsRepository.updateComment(commentId, userNum, comment);
-    return;
+  updateComment = async (commentId, userNum, comment, level) => {
+    if (!comment) {
+      throw new Error("댓글 내용을 입력해 주세요");
+    }
+    if (level) {
+      throw new Error("레벨값은 입력할 수 없습니다");
+    }
+    
+    const findOneComment = await this.commentsRepository.findOneComment(commentId, userNum);
+    
+
+    if(!findOneComment) {
+      throw new Error("존재하지 않는 댓글입니다.");
+    } else {
+      await this.commentsRepository.updateComment(commentId, userNum, comment);
+      return;
+    }
   };
 
   deleteComment = async (commentId, userNum) => {
@@ -52,8 +66,10 @@ class CommentsService {
       commentId,
       userNum
     );
+    if (!findOneComment) {
+      throw new Error("존재하지 않는 댓글입니다.");
+    }
     try {
-      console.log("ssssss: ", findOneComment.level);
       if (findOneComment.level === 1) {
         await this.commentsRepository.deleteComment(commentId, userNum);
         await this.commentsRepository.deleteReCommentCasCade(
