@@ -22,7 +22,7 @@ class MembersRepository {
 
   updateMember = async (userId, nickname, password) => {
     const updateMember = await Members.update(
-      { userId, nickname, password },
+      { nickname, password },
       {
         where: {
           userId,
