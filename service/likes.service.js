@@ -29,5 +29,4 @@ class LikesService {
   };
 }
 
-
 module.exports = LikesService;
