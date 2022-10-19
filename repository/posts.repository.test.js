@@ -1,5 +1,5 @@
 const PostsRepository = require("./posts.repository");
-postsRepository = new PostsRepository();
+const postsRepository = new PostsRepository();
 
 test("게시글 생성 - createPost", async () => {
     const id = 1;

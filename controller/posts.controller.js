@@ -47,10 +47,10 @@ class PostsController {
   };
 
   // 게시글 좋아요
-  likePost = async (req, res, next) => {
-    const { postId } = req.params;
-    const { id } = res.locals.user;
-    await this.PostsService.likePost(postId, id);
-  };
+  // likePost = async (req, res, next) => {
+  //   const { postId } = req.params;
+  //   const { id } = res.locals.user;
+  //   await this.PostsService.likePost(postId, id);
+  // };
 }
 module.exports = PostsController;

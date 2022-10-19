@@ -115,9 +115,9 @@ class PostsService {
   };
 
   // 게시글 좋아요
-  likePost = async (postNum, userNum) => {
-    return this.postsRepository.likePost;
-  };
+  // likePost = async (postNum, userNum) => {
+  //   return this.postsRepository.likePost;
+  // };
 }
 
 module.exports = PostsService;
