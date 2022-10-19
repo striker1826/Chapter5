@@ -50,7 +50,7 @@ class MembersService {
           userId,
           nickname,
           hashPassword,
-          confirmPw
+          // confirmPw
         );
         return {
           userId: createdMember.userId,
