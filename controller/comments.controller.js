@@ -49,8 +49,14 @@ class CommentsController {
   updateComment = async (req, res, next) => {
     try {
       const { commentId } = req.params;
-      const { comment } = req.body;
+      const { comment, level } = req.body;
       const { id } = res.locals.user;
+
+      if (level) {
+        res.status(400).send("레벨값은 입력할 수 없습니다");
+        return;
+      }
+
       await this.commentService.updateComment(commentId, id, comment);
       res.status(200).send("댓글이 수정되었습니다");
     } catch (err) {

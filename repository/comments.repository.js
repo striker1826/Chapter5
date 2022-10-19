@@ -22,13 +22,12 @@ class CommentsRepository {
 
   findOneComment = async (id) => {
     const findOneComment = await Comments.findByPk(id);
-    console.log("@@@repo:", findOneComment)
     return findOneComment;
-  }
+  };
 
   deleteComment = async (id, userNum) => {
     try {
-      await Comments.destroy({ where: {id, userNum}});
+      await Comments.destroy({ where: { id, userNum } });
       return;
     } catch (err) {
       throw new Error(err.message);
@@ -37,7 +36,7 @@ class CommentsRepository {
 
   deleteReCommentCasCade = async (commentNum) => {
     try {
-      await Comments.destroy({where: {commentNum}});
+      await Comments.destroy({ where: { commentNum } });
       return;
     } catch (err) {
       throw new Error(err.message);
