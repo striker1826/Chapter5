@@ -81,7 +81,7 @@ class CommentsService {
       }
       return findOneComment;
     } catch (err) {
-      throw new Error(err);
+      throw Error(err);
     }
   };
 }
