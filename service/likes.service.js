@@ -21,12 +21,13 @@ class LikesService {
       return { message: "게시글에 좋아요를 취소했습니다." };
     }
   };
+  
+  getAllLikePosts = async (userId) => {
+    const myLikeArr = await this.likesRepository.getAllLikePosts(userId);
+    let myLikeList = myLikeArr.sort((a, b) => b.createdAt - a.createdAt);
+    return myLikeList;
+  };
 }
 
-getAllLikePosts = async (userId) => {
-  const myLikeArr = await this.likesRepository.getAllLikePosts(userId);
-  let myLikeList = myLikeArr.sort((a, b) => b.createdAt - a.createdAt);
-  return myLikeList;
-};
 
 module.exports = LikesService;

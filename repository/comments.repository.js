@@ -28,7 +28,7 @@ class CommentsRepository {
 
   deleteComment = async (id, userNum) => {
     try {
-      await Comments.destroy({ where: { id, userNum } });
+      await Comments.destroy({ where: {id, userNum}});
       return;
     } catch (err) {
       throw new Error(err.message);
