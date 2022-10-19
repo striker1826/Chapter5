@@ -1,3 +1,4 @@
+const { error } = require("console");
 const comments = require("../migrations/comments");
 const CommentsRepository = require("../repository/comments.repository");
 const PostsRepository = require("../repository/posts.repository");
@@ -12,7 +13,9 @@ class CommentsService {
       throw new Error("존재하지 않는 글입니다.");
     }
     if (level === 2) {
-      const existComment = await this.commentsRepository.findOneComment(commentId);
+      const existComment = await this.commentsRepository.findOneComment(
+        commentId
+      );
       if (!existComment || existComment.commentNum !== 0) {
         throw new Error("존재하지 않는 댓글입니다.");
       }
@@ -46,15 +49,31 @@ class CommentsService {
 
   deleteComment = async (commentId, userNum) => {
     const findOneComment = await this.commentsRepository.findOneComment(
-      commentId
+      commentId,
+      userNum
     );
-    if (findOneComment.level === 1) {
-      await this.commentsRepository.deleteComment(commentId, userNum);
-      await this.commentsRepository.deleteReCommentCasCade(commentId, userNum);
-    } else {
-      await this.commentsRepository.deleteComment(commentId, userNum);
+    try {
+      if (findOneComment) {
+        throw new Error();
+      }
+    } catch (err) {
+      return "존재하지 않는 댓글입니다";
     }
-    return findOneComment;
+    try {
+      console.log("ssssss: ", findOneComment.level);
+      if (findOneComment.level === 1) {
+        await this.commentsRepository.deleteComment(commentId, userNum);
+        await this.commentsRepository.deleteReCommentCasCade(
+          commentId,
+          userNum
+        );
+      } else {
+        await this.commentsRepository.deleteComment(commentId, userNum);
+      }
+      return findOneComment;
+    } catch (err) {
+      throw new Error(err);
+    }
   };
 }
 

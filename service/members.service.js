@@ -41,6 +41,7 @@ class MembersService {
       password
     );
 
+    console.log(findOneMember);
     if (findOneMember && userId === findOneMember.userId) {
       throw new Error("이미 존재하는 아이디입니다.");
     } else {
@@ -49,7 +50,7 @@ class MembersService {
         const createdMember = await this.membersRepository.createMembers(
           userId,
           nickname,
-          hashPassword,
+          hashPassword
           // confirmPw
         );
         return {
